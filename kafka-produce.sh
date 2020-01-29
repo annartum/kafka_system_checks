@@ -1,12 +1,12 @@
-PARTITION_COUNT=6
-export KAFKA_OPTS="-Djava.security.auth.login.config=jaas.conf -Xmx1G"
-kafka-topics --delete --bootstrap-server shared-cdh6-2.dilisim.local:9093 --command-config client.properties --topic ha_test
-kafka-topics --create --bootstrap-server shared-cdh6-2.dilisim.local:9093 --command-config client.properties --topic ha_test --partitions ${PARTITION_COUNT} --replication-factor 3
-kafka-topics --describe --bootstrap-server shared-cdh6-2.dilisim.local:9093 --command-config client.properties --topic ha_test
-for i in {1..100000}
+source env.sh
+
+kafka-topics --delete --bootstrap-server ${BROKER_ADDRESS} --command-config client.properties --topic ${HA_TEST_TOPIC}
+kafka-topics --create --bootstrap-server ${BROKER_ADDRESS} --command-config client.properties --topic ${HA_TEST_TOPIC} --partitions ${HA_TEST_TOPIC_PARTITIONS} --replication-factor ${HA_TEST_TOPIC_REPLICATION}
+kafka-topics --describe --bootstrap-server ${BROKER_ADDRESS} --command-config client.properties --topic ${HA_TEST_TOPIC}
+for i in $(seq 1 ${HA_TEST_PER_PARTITION_ELEMENT_COUNT})
 do
-  for j in $(seq 1 ${PARTITION_COUNT})
+  for j in $(seq 1 ${HA_TEST_TOPIC_PARTITIONS})
   do
     echo "$j:$i"
   done
-done | kafka-console-producer --broker-list shared-cdh6-2.dilisim.local:9093 --topic ha_test --producer.config client.properties --property "parse.key=true" --property "key.separator=:"
+done | kafka-console-producer --broker-list ${BROKER_ADDRESS} --topic ${HA_TEST_TOPIC} --producer.config client.properties --property "parse.key=true" --property "key.separator=:"

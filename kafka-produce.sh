@@ -3,6 +3,8 @@ source env.sh
 BROKER_ADDRESS=$1
 COUNTER_START=$2
 
+echo "BROKER ADDRESS" $BROKER_ADDRESS
+
 kafka-topics --delete --bootstrap-server ${BROKER_ADDRESS} --command-config client.properties --topic ${TOPIC_NAME}
 kafka-topics --create --bootstrap-server ${BROKER_ADDRESS} --command-config client.properties --topic ${TOPIC_NAME} --partitions ${TOPIC_PARTITIONS} --replication-factor ${TOPIC_REPLICATION}
 kafka-topics --describe --bootstrap-server ${BROKER_ADDRESS} --command-config client.properties --topic ${TOPIC_NAME}

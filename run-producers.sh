@@ -1,5 +1,7 @@
 source env.sh
 
+./break-replication-paths.sh
+
 for site in SITE_A SITE_B
 do
    broker_address_var=${site}_BROKER_ADDRESS

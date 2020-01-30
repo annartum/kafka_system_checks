@@ -15,9 +15,11 @@ export SITE_A_ELEMENT_COUNT=17
 
 export SITE_B_SRM_NAME=kafka2
 export SITE_B_BROKER_ADDRESS=shared-cdh6-2.dilisim.local:19093
-export SITE_B_COUNTER_INITIAL_VALUE=$(( ${SITE_A_ELEMENT_COUNT} + 1))
+export SITE_B_COUNTER_INITIAL_VALUE=$(( ${SITE_A_ELEMENT_COUNT} + 2))
 export SITE_B_ELEMENT_COUNT=11
 
 # DONT CHANGE ANYTHING BELOW THIS LINE
 export TRUSTSTORE_SETTINGS="-Djavax.net.ssl.trustStore=${TRUSTSTORE_PATH} -Djavax.net.ssl.trustStorePassword=${TRUSTSTORE_PASSWORD}"
 export KAFKA_OPTS="${TRUSTSTORE_SETTINGS} -Djava.security.auth.login.config=jaas.conf -Xmx1G"
+
+set -e

@@ -13,5 +13,5 @@ do
 
   kafka-console-consumer --bootstrap-server ${!broker_address_var} --whitelist "^((${SITE_A_SRM_NAME}|${SITE_B_SRM_NAME})\.)?${TOPIC_NAME}$" \
         --consumer.config client.properties --timeout-ms 5000 --property 'print.key=true' --property 'key.separator=:' \
-	--max-messages ${!element_count_var} > ${site}_data.txt
+	--group ${CONSUMER_GROUP_NAME} --max-messages ${!element_count_var} > ${site}_data.txt
 done

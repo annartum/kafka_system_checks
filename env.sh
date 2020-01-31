@@ -21,5 +21,3 @@ export SITE_B_ELEMENT_COUNT=11
 # DONT CHANGE ANYTHING BELOW THIS LINE
 export TRUSTSTORE_SETTINGS="-Djavax.net.ssl.trustStore=${TRUSTSTORE_PATH} -Djavax.net.ssl.trustStorePassword=${TRUSTSTORE_PASSWORD}"
 export KAFKA_OPTS="${TRUSTSTORE_SETTINGS} -Djava.security.auth.login.config=jaas.conf -Xmx1G"
-
-set -e
